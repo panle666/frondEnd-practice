@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>轮播</title>
+  </head>
+  <style>
+    .main {
+      width: 800px;
+      height: 500px;
+      border: 1px solid black;
+      margin: 0 auto;
+      position: relative;
+    }
+    .main > div {
+      width: 100%;
+      height: 100%;
+    }
+    .class1 {
+      background-color: yellow;
+    }
+    .class2 {
+      background-color: red;
+    }
+    .class3 {
+      background-color: black;
+    }
+    .class4 {
+      background-color: green;
+    }
+  </style>
+  <body>
+    <div class="main">
+      <div class="class1"></div>
+      <div class="class2"></div>
+      <div class="class3"></div>
+      <div class="class4"></div>
+    </div>
+  </body>
+</html>
+<script>
+  let showIndex = 0;
+  const childDivs = document.querySelectorAll(".main div");
+
+  function showOrHidden(elements, index) {
+    elements.forEach((item, index) => {
+      if (index != showIndex) {
+        item.style.display = "none";
+      } else {
+        item.style.display = "block";
+      }
+    });
+  }
+  showOrHidden(childDivs, showIndex);
+  switchDiv();
+
+  function switchDiv() {
+    setTimeout(() => {
+      showIndex++;
+      if (showIndex >= childDivs.length) {
+        showIndex = 0;
+      }
+      showOrHidden(childDivs, showIndex);
+      switchDiv();
+    }, 3000);
+  }
+</script>

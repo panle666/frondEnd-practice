@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>防抖</title>
+  </head>
+  <style>
+    .clickDiv {
+      height: 30px;
+      width: 80px;
+      line-height: 30px;
+      text-align: center;
+      background-color: green;
+      border-radius: 10%;
+      color: white;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+    }
+  </style>
+  <body>
+    <div class="clickDiv">点击</div>
+  </body>
+</html>
+<script>
+  //在事件被触发n秒后再执行回调，如果在这n秒内又被触发，则重新计时。
+  function antiShake(fn, arg, timeout = 3000) {
+    let setTimeoutId;
+    return function () {
+      if (setTimeoutId) {
+        clearTimeout(setTimeoutId);
+      }
+      setTimeoutId = setTimeout(() => {
+        fn(arg);
+        clearTimeout(setTimeoutId);
+      }, timeout);
+    };
+  }
+
+  function clickFn([parm1, parm2]) {
+    console.log(new Date());
+    console.log("parm1", parm1);
+    console.log("parm2", parm2);
+    console.log("已触发!");
+  }
+
+  document
+    .querySelector(".clickDiv")
+    .addEventListener("click", antiShake(clickFn, ["p1", "p2"]));
+</script>

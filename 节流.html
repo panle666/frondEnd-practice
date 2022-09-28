@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>节流</title>
+    <style>
+      .clickDiv {
+        background-color: blue;
+        color: white;
+        height: 30px;
+        width: 80px;
+        border-radius: 10%;
+        line-height: 30px;
+        text-align: center;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <style></style>
+  <body>
+    <div class="clickDiv">点击</div>
+  </body>
+</html>
+<script>
+  //在事件被触发n秒内只运行一次，若在 n 秒内重复触发，只有一次生效
+  function throttle(fn, arg, time = 1000) {
+    let isOver = true;
+    return function () {
+      if (isOver) {
+        isOver = false;
+        fn(arg);
+        setTimeout(() => {
+          isOver = true;
+        }, time);
+      }
+    };
+  }
+
+  function consoleFn([parm1, parm2]) {
+    console.log(new Date());
+    console.log("parm1", parm1);
+    console.log("parm2", parm2);
+    console.log("点击！！");
+  }
+
+  let isOver = false;
+  document
+    .querySelector(".clickDiv")
+    .addEventListener("click", throttle(consoleFn, ["p1", "p2"]));
+</script>
