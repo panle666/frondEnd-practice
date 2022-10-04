@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>水平垂直居中</title>
+    <style>
+      .demo1 {
+        width: 200px;
+        height: 200px;
+        background: yellow;
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        margin: auto;
+      }
+
+
+      .demo2 {
+        width: 200px;
+        height: 200px;
+        background: yellow;
+
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin-left: -100px;
+        margin-top: -100px;
+      }
+
+
+      .demo3 {
+        width: 200px;
+        height: 200px;
+        background: yellow;
+
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+
+      .demo4 {
+        height: 1000px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .demo4 > div {
+        background: yellow;
+      }
+
+
+      .demo5 {
+        display: grid;
+        height: 1000px;
+      }
+      .demo5 > div {
+        justify-self: center;
+        align-self: center;
+        background: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="demo1">
+      <div class="child"></div>
+    </div>
+  </body>
+</html>
