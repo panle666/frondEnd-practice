@@ -10,7 +10,7 @@ function deepClone(initalObj, finalObj) {
         }
         if (typeof prop === 'object') {
             obj[i] = (prop.constructor === Array) ? [] : {};
-            arguments.callee(prop, obj[i]);
+            deepClone(prop, obj[i]);
         } else {
             obj[i] = prop;
         }
