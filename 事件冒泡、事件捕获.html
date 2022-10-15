@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .one {
+        width: 200px;
+        height: 100px;
+        border: 1px solid black;
+        background-color: red;
+      }
+      .two {
+        background-color: green;
+      }
+      .three {
+        background-color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="one">
+      第一层
+      <div class="two">
+        第二层
+        <div class="three">第三层</div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  // addEventListener第三个参数：true捕获，false冒泡，默认为冒泡模式
+  // 捕获：自上而下执行捕获模式的处理器、再执行冒泡模式
+  // 冒泡：自下而上执行冒泡模式的处理器、再执行捕获模式
+  // 捕获模式优先与于冒泡模式
+  // 不管是捕获还是冒泡，都是由子类触发，就算是捕获模式点击父类也不会触发子类
+  // 点击子类，先处理捕获模式的父类(最上层开始，自上而下执行捕获模式的处理器，最后执行冒泡模式，自下而上)，无捕获模式的父类，则执行冒泡模式，自下而上
+
+  const one = document.querySelector(".one");
+  //点击one，父类没有触发的事件，只触发自身one，由于two、three是子类，不会被触发
+  one.addEventListener(
+    "click",
+    function () {
+      console.log("one");
+    },
+    true
+  );
+
+  const two = document.querySelector(".two");
+  //点击two，父类one是捕获模式，捕获模式优先冒泡模式，先触发one，再触发two，three是two的子类，父类不会触发子类的处理器
+  //最终打印结果：one two
+  two.addEventListener(
+    "click",
+    function () {
+      console.log("two");
+    },
+    false
+  );
+
+  const three = document.querySelector(".three");
+  //点击three,父类one是捕获模式，先执行父类one，然后执行自身three冒泡模式，自下而上到two
+  //最终打印结果：one three two
+  three.addEventListener(
+    "click",
+    function () {
+      console.log("three");
+    },
+    true
+  );
+</script>
