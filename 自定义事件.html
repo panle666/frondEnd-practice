@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input class="btn" type="button" value="点击" />
+  </body>
+</html>
+
+<script>
+  const btn = document.querySelector(".btn");
+  //自定义事件基本优势是解耦，使代码易于编写，出现错误时更容易调试，更容易分享部分代码
+  //自定义test事件
+  function triggerEvent(target, eventType, eventDetail) {
+    const event = new CustomEvent(eventType, {
+      detail: eventDetail,
+    });
+    target.dispatchEvent(event);
+  }
+
+  btn.addEventListener("click", function () {
+    console.log("click");
+    //触发test事件
+    triggerEvent(document, "test", 111);
+  });
+
+  document.addEventListener("test", function (e) {
+    console.log("test");
+    console.log("e", e.detail);
+  });
+</script>
