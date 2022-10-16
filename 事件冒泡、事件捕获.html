@@ -38,12 +38,16 @@
   // 捕获模式优先与于冒泡模式
   // 不管是捕获还是冒泡，都是由子类触发，就算是捕获模式点击父类也不会触发子类
   // 点击子类，先处理捕获模式的父类(最上层开始，自上而下执行捕获模式的处理器，最后执行冒泡模式，自下而上)，无捕获模式的父类，则执行冒泡模式，自下而上
+  // 阻止冒泡、捕获：e.stopPropagation()、 e.stopImmediatePropagation()
+  // stopPropagation() 用于取消所有后续事件捕获或事件冒泡。只有 bubbles为 true 才可以调用这个方法
+  // stopImmediatePropagation() 用于取消所有后续事件捕获或事件冒泡，并阻止调用任何后续事件处理程序（DOM3 Events 中新增）
 
   const one = document.querySelector(".one");
   //点击one，父类没有触发的事件，只触发自身one，由于two、three是子类，不会被触发
   one.addEventListener(
     "click",
-    function () {
+    function (e) {
+      // e.stopPropagation();
       console.log("one");
     },
     true
@@ -54,7 +58,8 @@
   //最终打印结果：one two
   two.addEventListener(
     "click",
-    function () {
+    function (e) {
+      // e.stopPropagation();
       console.log("two");
     },
     false
@@ -65,7 +70,8 @@
   //最终打印结果：one three two
   three.addEventListener(
     "click",
-    function () {
+    function (e) { 
+      // e.stopPropagation();
       console.log("three");
     },
     true
